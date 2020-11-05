@@ -2,6 +2,7 @@ from .start_operation import BaseOperator
 from binance.client import Client
 import logging
 import time
+import asyncio
 
 logging.basicConfig(format='%(asctime)s - %(message)s', level=logging.INFO)
 
@@ -74,6 +75,8 @@ class TrailingBuyOperator(BaseOperator):
         '''
         self.deviation = deviation
         self.price_order = price_order
+
+        #TODO: make async
         while not self.bought_stop:
             self._actor(symbol=symbol)
             time.sleep(2)
